@@ -1,23 +1,37 @@
 #!/usr/bin/env node
-var argv = require('yargs').argv;
-var format = require('string-format')
+
+var Hjson = require('hjson');
 var fs = require('fs');
 var path = require('path');
+var format = require('string-format')
 var spawn = require('child_process').spawn;
 
-var startWinscpCommand = '"{winscp}" {type}://{user}:{password}@{host}:{port}"{remote_path}" /rawsettings LocalDirectory="{local_path}"';
-var configFile = argv._[0];
+var commander = require('commander');
 
-eval('var sftpConfig = '+fs.readFileSync(configFile).toString());
+commander
+	.version('1.0.0')
+	.arguments('<sftp-config.json>')
+	.action(function (sftpConfigPath) {
+		var sftpConfigString = fs.readFileSync(sftpConfigPath).toString();
+		var sftpConfig = Hjson.parse(sftpConfigString);
 
-sftpConfig.winscp = 'WinSCP';
-sftpConfig.local_path = path.dirname(configFile);
+		openWinscp({
+			type: sftpConfig.type,
+			host: sftpConfig.host,
+			port: sftpConfig.port,
+			user: sftpConfig.user,
+			password: sftpConfig.password,
+			remote_path: sftpConfig.remote_path,
+			local_path: path.dirname(sftpConfigPath),
+			winscp: 'WinSCP',
+		});
+	})
+	.parse(process.argv);
 
-var a = format(startWinscpCommand, sftpConfig);
+function openWinscp(opts) {
+	var command = '"{winscp}" {type}://"{user}":"{password}"@{host}:{port}"{remote_path}" /rawsettings LocalDirectory="{local_path}"';
+	spawn('sh', ['-c', format(command, opts)], {detached: true}).unref();
+	process.exit();
+}
 
-var child = spawn('sh', ['-c', a], {
-	detached: true
-});
-child.unref();
-process.exit();
-
+module.exports = openWinscp;

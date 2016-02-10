@@ -4,13 +4,28 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "string-format": "^0.5.0",
-    "yargs": "^3.30.0"
+    "commander": "^2.9.0",
+    "hjson": "^1.7.6",
+    "string-format": "^0.5.0"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "bin": {
+    "sftp-open": "index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thecotne/sftp-open.git"
+  },
+  "keywords": [
+    "winscp"
+  ],
+  "author": "cotne nazarashvili <cotne.95@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thecotne/sftp-open/issues"
+  },
+  "homepage": "https://github.com/thecotne/sftp-open#readme"
 }
