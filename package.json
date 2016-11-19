@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "commander": "^2.9.0",
-    "hjson": "^1.7.6",
+    "hjson": "^2.3.1",
     "string-format": "^0.5.0"
   },
   "devDependencies": {},
