@@ -1,6 +1,6 @@
 {
   "name": "sftp-open",
-  "description": "",
+  "description": "open WinSCP with sftp-config.json",
   "keywords": [
     "winscp"
   ],
@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "commander": "^2.9.0",
-    "hjson": "^1.7.6",
+    "json5": "^0.5.0",
     "string-format": "^0.5.0"
   },
   "devDependencies": {
