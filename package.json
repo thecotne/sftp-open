@@ -1,10 +1,43 @@
 {
   "name": "sftp-open",
   "description": "",
-  "main": "lib/index.js",
+  "keywords": [
+    "winscp"
+  ],
+  "homepage": "https://github.com/thecotne/sftp-open#readme",
+  "bugs": {
+    "url": "https://github.com/thecotne/sftp-open/issues"
+  },
+  "license": "MIT",
+  "author": "cotne nazarashvili <cotne.95@gmail.com>",
   "files": [
     "lib/index.js"
   ],
+  "main": "lib/index.js",
+  "bin": {
+    "sftp-open": "lib/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thecotne/sftp-open.git"
+  },
+  "scripts": {
+    "build": "babel src/index.js -o lib/index.js",
+    "build:production": "babel src/index.js -o lib/index.js",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "lint": "eslint {src,spec}/**.js",
+    "report-coverage": "nyc report --reporter=lcov",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "test": "cross-env NODE_ENV=test nyc jasmine",
+    "test:lib": "cross-env JASMINE_TEST=lib jasmine",
+    "test:production": "npm run build:production && npm run test:lib",
+    "watch": "babel src/index.js -o lib/index.js -w"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
   "dependencies": {
     "commander": "^2.9.0",
     "hjson": "^1.7.6",
@@ -15,42 +48,29 @@
     "babel-core": "^6.18.2",
     "babel-eslint": "^7.1.1",
     "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-istanbul": "^3.0.0",
     "babel-plugin-transform-do-expressions": "^6.8.0",
     "babel-preset-eslatest-node6": "^1.0.1",
+    "babel-register": "^6.18.0",
+    "coveralls": "^2.11.15",
+    "cross-env": "^3.1.3",
     "cz-conventional-changelog": "^1.2.0",
     "eslint": "^3.11.0",
     "eslint-config-standard": "^6.2.1",
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-standard": "^2.0.1",
+    "jasmine": "^2.5.2",
+    "nyc": "^10.0.0",
     "semantic-release": "^6.3.2"
   },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
-  "scripts": {
-    "lint": "eslint src/**",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel src/index.js -o lib/index.js",
-    "build:production": "babel src/index.js -o lib/index.js",
-    "watch": "babel src/index.js -o lib/index.js -w",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
-  },
-  "bin": {
-    "sftp-open": "lib/index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/thecotne/sftp-open.git"
-  },
-  "keywords": [
-    "winscp"
-  ],
-  "author": "cotne nazarashvili <cotne.95@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/thecotne/sftp-open/issues"
-  },
-  "homepage": "https://github.com/thecotne/sftp-open#readme"
+  "nyc": {
+    "include": [
+      "src/*.js"
+    ],
+    "require": [
+      "babel-register"
+    ],
+    "sourceMap": false,
+    "instrument": false
+  }
 }
