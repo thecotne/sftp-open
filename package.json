@@ -1,13 +1,22 @@
 {
   "name": "sftp-open",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "files": [
+    "lib/index.js"
+  ],
   "dependencies": {
     "commander": "^2.9.0",
     "hjson": "^1.7.6",
     "string-format": "^0.5.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.18.2",
+    "babel-eslint": "^7.1.1",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-do-expressions": "^6.8.0",
+    "babel-preset-eslatest-node6": "^1.0.1",
     "cz-conventional-changelog": "^1.2.0",
     "eslint": "^3.11.0",
     "eslint-config-standard": "^6.2.1",
@@ -21,12 +30,15 @@
     }
   },
   "scripts": {
-    "lint": "eslint index.js",
+    "lint": "eslint src/**",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src/index.js -o lib/index.js",
+    "build:production": "babel src/index.js -o lib/index.js",
+    "watch": "babel src/index.js -o lib/index.js -w",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "bin": {
-    "sftp-open": "index.js"
+    "sftp-open": "lib/index.js"
   },
   "repository": {
     "type": "git",
