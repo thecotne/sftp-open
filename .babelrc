@@ -1,4 +1,9 @@
 {
   "presets": ["eslatest-node6"],
-  "plugins": ["add-module-exports", "transform-do-expressions"]
+  "plugins": ["add-module-exports", "transform-do-expressions"],
+  "env": {
+    "test": {
+      "plugins": ["istanbul"]
+    }
+  }
 }
