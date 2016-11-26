@@ -1,37 +1,43 @@
 #!/usr/bin/env node
 
-var Hjson = require('hjson')
-var fs = require('fs')
-var path = require('path')
-var format = require('string-format')
-var spawn = require('child_process').spawn
+import JSON5 from 'json5'
+import {readFileSync}from 'fs'
+import {dirname} from 'path'
+import {spawn} from 'child_process'
+import {version} from '../package'
+import commander from 'commander'
 
-var commander = require('commander')
-
-commander
-  .version('1.0.0')
+const app = commander
+  .version(version)
   .arguments('<sftp-config.json>')
-  .action(function (sftpConfigPath) {
-    var sftpConfigString = fs.readFileSync(sftpConfigPath).toString()
-    var sftpConfig = Hjson.parse(sftpConfigString)
-
-    openWinscp({
-      type: sftpConfig.type,
-      host: sftpConfig.host,
-      port: sftpConfig.port,
-      user: sftpConfig.user,
-      password: sftpConfig.password,
-      remote_path: sftpConfig.remote_path,
-      local_path: path.dirname(sftpConfigPath),
-      winscp: 'WinSCP'
-    })
-  })
+  .action(openWinscpByPath)
   .parse(process.argv)
 
-function openWinscp (opts) {
-  var command = '"{winscp}" {type}://"{user}":"{password}"@{host}:{port}"{remote_path}" /rawsettings LocalDirectory="{local_path}"'
-  spawn('sh', ['-c', format(command, opts)], {detached: true}).unref()
-  process.exit()
+// show help message by default
+if (app.args.length === 0) {
+  app.help()
 }
 
-module.exports = openWinscp
+export const commandTemplate = '"{winscp}" {type}://"{user}":"{password}"@{host}:{port}"{remote_path}" /rawsettings LocalDirectory="{local_path}"'
+
+export function openWinscpByPath (sftpConfigPath) {
+  const sftpConfigString = readFileSync(sftpConfigPath).toString()
+  const sftpConfig = JSON5.parse(sftpConfigString)
+
+  openWinscp({
+    type: sftpConfig.type,
+    host: sftpConfig.host,
+    port: sftpConfig.port,
+    user: sftpConfig.user,
+    password: sftpConfig.password,
+    remote_path: sftpConfig.remote_path,
+    local_path: path.dirname(sftpConfigPath),
+    winscp: 'WinSCP'
+  })
+}
+
+export default function openWinscp (opts) {
+  spawn('sh', ['-c', format(commandTemplate, opts)], {detached: true}).unref();
+
+  process.exit()
+}
