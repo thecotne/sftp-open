@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
 import JSON5 from 'json5'
-import {readFileSync}from 'fs'
+import {readFileSync} from 'fs'
 import {dirname} from 'path'
 import {spawn} from 'child_process'
 import {version} from '../package'
+import format from 'string-format'
 import commander from 'commander'
 
 const app = commander
@@ -31,13 +32,13 @@ export function openWinscpByPath (sftpConfigPath) {
     user: sftpConfig.user,
     password: sftpConfig.password,
     remote_path: sftpConfig.remote_path,
-    local_path: path.dirname(sftpConfigPath),
+    local_path: dirname(sftpConfigPath),
     winscp: 'WinSCP'
   })
 }
 
 export default function openWinscp (opts) {
-  spawn('sh', ['-c', format(commandTemplate, opts)], {detached: true}).unref();
+  spawn('sh', ['-c', format(commandTemplate, opts)], {detached: true}).unref()
 
   process.exit()
 }
