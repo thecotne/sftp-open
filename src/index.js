@@ -8,17 +8,6 @@ import {version} from '../package'
 import format from 'string-format'
 import commander from 'commander'
 
-const app = commander
-  .version(version)
-  .arguments('<sftp-config.json>')
-  .action(openWinscpByPath)
-  .parse(process.argv)
-
-// show help message by default
-if (app.args.length === 0) {
-  app.help()
-}
-
 export const commandTemplate = '"{winscp}" {type}://"{user}":"{password}"@{host}:{port}"{remote_path}" /rawsettings LocalDirectory="{local_path}"'
 
 export function openWinscpByPath (sftpConfigPath) {
@@ -41,4 +30,15 @@ export default function openWinscp (opts) {
   spawn('sh', ['-c', format(commandTemplate, opts)], {detached: true}).unref()
 
   process.exit()
+}
+
+const app = commander
+  .version(version)
+  .arguments('<sftp-config.json>')
+  .action(openWinscpByPath)
+  .parse(process.argv)
+
+// show help message by default
+if (app.args.length === 0) {
+  app.help()
 }
