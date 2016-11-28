@@ -26,19 +26,23 @@ export function openWinscpByPath (sftpConfigPath) {
   })
 }
 
-export default function openWinscp (opts) {
+export function openWinscp (opts) {
   spawn('sh', ['-c', format(commandTemplate, opts)], {detached: true}).unref()
-
-  process.exit()
 }
 
-const app = commander
-  .version(version)
-  .arguments('<sftp-config.json>')
-  .action(openWinscpByPath)
-  .parse(process.argv)
+export default openWinscp
 
-// show help message by default
-if (app.args.length === 0) {
-  app.help()
+if (require.main === module) {
+  const app = commander
+    .version(version)
+    .arguments('<sftp-config.json>')
+    .action(openWinscpByPath)
+    .parse(process.argv)
+
+  // show help message by default
+  if (app.args.length === 0) {
+    app.help()
+  }
+
+  process.exit()
 }

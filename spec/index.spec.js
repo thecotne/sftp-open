@@ -1,11 +1,14 @@
 /* eslint-env node, jasmine */
 
-const sftpOpen = process.env.JASMINE_TEST === 'lib'
+const sftpOpenPkg = process.env.JASMINE_TEST === 'lib'
   ? require('../lib/index')
   : require('../src/index')
 
 describe('sftp-open', () => {
-  it('should export function', () => {
-    expect(sftpOpen).toEqual(jasmine.any(Function))
+  it('validate exported variable types', () => {
+    expect(sftpOpenPkg.default).toEqual(jasmine.any(Function))
+    expect(sftpOpenPkg.openWinscp).toEqual(jasmine.any(Function))
+    expect(sftpOpenPkg.openWinscpByPath).toEqual(jasmine.any(Function))
+    expect(sftpOpenPkg.commandTemplate).toEqual(jasmine.any(String))
   })
 })
