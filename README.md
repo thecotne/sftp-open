@@ -9,6 +9,7 @@
 [![NPM DevDependencies](https://img.shields.io/david/dev/thecotne/sftp-open.svg?style=flat-square&maxAge=300)](https://david-dm.org/thecotne/sftp-open?type=dev)
 [![NPM Downloads](https://img.shields.io/npm/dm/sftp-open.svg?style=flat-square&maxAge=300)](https://www.npmjs.com/package/sftp-open)
 [![NPM Package Version](https://img.shields.io/npm/v/sftp-open.svg?style=flat-square&maxAge=300)](https://www.npmjs.com/package/sftp-open)
+[![Greenkeeper badge](https://badges.greenkeeper.io/thecotne/sftp-open.svg)](https://greenkeeper.io/)
 
 open WinSCP with sftp-config.json
 
