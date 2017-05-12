@@ -1,5 +1,7 @@
 # sftp-open
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/thecotne/sftp-open.svg)](https://greenkeeper.io/)
+
 [![Package Quality](http://npm.packagequality.com/badge/sftp-open.png)](http://packagequality.com/#?package=sftp-open)
 [![JavaScript Style Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
