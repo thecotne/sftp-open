@@ -1,6 +1,5 @@
 # sftp-open
 
-
 [![Package Quality](http://npm.packagequality.com/badge/sftp-open.png)](http://packagequality.com/#?package=sftp-open)
 [![JavaScript Style Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
