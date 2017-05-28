@@ -31,7 +31,9 @@
     "test": "cross-env NODE_ENV=test nyc jasmine",
     "test:lib": "cross-env JASMINE_TEST=lib jasmine",
     "test:production": "npm run build:production && npm run test:lib",
-    "watch": "babel src/index.js -o lib/index.js -w"
+    "watch": "babel src/index.js -o lib/index.js -w",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "config": {
     "commitizen": {
@@ -43,7 +45,8 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-node": "^4.2.2",
     "json5": "^0.5.0",
-    "string-format": "^0.5.0"
+    "string-format": "^0.5.0",
+    "snyk": "^1.31.0"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
@@ -74,5 +77,6 @@
     ],
     "sourceMap": false,
     "instrument": false
-  }
+  },
+  "snyk": true
 }
