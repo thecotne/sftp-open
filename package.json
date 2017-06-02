@@ -41,7 +41,7 @@
   "dependencies": {
     "commander": "^2.9.0",
     "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-node": "^4.2.2",
+    "eslint-plugin-node": "^5.0.0",
     "json5": "^0.5.0",
     "string-format": "^0.5.0"
   },
