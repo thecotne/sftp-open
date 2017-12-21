@@ -63,7 +63,7 @@
     "eslint-plugin-standard": "^3.0.1",
     "jasmine": "^2.8.0",
     "nyc": "^11.2.1",
-    "semantic-release": "^8.0.3"
+    "semantic-release": "^11.0.2"
   },
   "nyc": {
     "include": [
