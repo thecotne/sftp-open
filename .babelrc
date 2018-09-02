@@ -1,9 +1,22 @@
 {
-  "presets": ["eslatest-node6"],
-  "plugins": ["add-module-exports", "transform-do-expressions"],
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": 8
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    "add-module-exports"
+  ],
   "env": {
     "test": {
-      "plugins": ["istanbul"]
+      "plugins": [
+        "istanbul"
+      ]
     }
   }
 }
